@@ -26,3 +26,20 @@
 // }
 
 // console.log(process.argv[2])
+
+const fs = require('fs');
+const path = require('path');
+const dirPath =path.join(__dirname,'files');
+// console.warn(dirPath)
+
+// for(i=0;i<5;i++)
+// {
+//     fs.writeFileSync(dirPath+"/hello"+i+".txt", "a simple text file"); //or fs.writeFileSync("hello${i}.txt", "a simple text file")
+// }
+
+fs.readdir(dirPath,(err,files)=>{
+    // console.warn(files)
+    files.forEach((item)=>{
+          console.log("file name is",item)
+    })
+})
