@@ -27,9 +27,9 @@
 
 // console.log(process.argv[2])
 
-const fs = require('fs');
-const path = require('path');
-const dirPath =path.join(__dirname,'files');
+// const fs = require('fs');
+// const path = require('path');
+// const dirPath =path.join(__dirname,'files');
 // console.warn(dirPath)
 
 // for(i=0;i<5;i++)
@@ -37,9 +37,27 @@ const dirPath =path.join(__dirname,'files');
 //     fs.writeFileSync(dirPath+"/hello"+i+".txt", "a simple text file"); //or fs.writeFileSync("hello${i}.txt", "a simple text file")
 // }
 
-fs.readdir(dirPath,(err,files)=>{
-    // console.warn(files)
-    files.forEach((item)=>{
-          console.log("file name is",item)
-    })
-})
+// fs.readdir(dirPath,(err,files)=>{
+//     // console.warn(files)
+//     files.forEach((item)=>{
+//           console.log("file name is",item)
+//     })
+// })
+
+const fs=require('fs');
+const path= require('path');
+const dirPath= path.join(__dirname,'crud');
+const filePath= `${dirPath}/apple.txt`;
+// fs.writeFileSync(filePath,'this is a text file');
+// fs.readFile(filePath,'utf8',(err,item)=>{
+//     console.log(item);
+// })
+
+// fs.appendFile(filePath,'and file name is apple.txt',(err)=>{
+//     if(!err) console.log('file is updated')
+// })
+
+// fs.rename(filePath,`${dirPath}/fruit.txt`,(err) =>{
+//     if(!err) console.log('file is updated')
+// })
+fs.unlinkSync(`${dirPath}/fruit.txt`)
