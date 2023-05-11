@@ -101,16 +101,21 @@ const express = require("express");
 const app = express();
 
 app.get("", (req, res) => {
-  console.log("data sent by browser = ", req.query.name);
-  res.send("Welcome,"+ req.query.name);
+  //   console.log("data sent by browser = ", req.query.name);
+  res.send(`<h1>Welcome, to Home Page.</h1><a href="/about">About Page</a>`);
 });
 
 app.get("/about", (req, res) => {
-  res.send("Hello, this is About Page");
+  res.send(
+    `<input type="text" placeholder="User name" value=${req.query.name}/>Hello, this is About Page`
+  );
 });
 
 app.get("/help", (req, res) => {
-  res.send("Hello, this is Help Page");
+  res.send({
+    name: "taru",
+    email: "taru@text.com",
+  });
 });
 
 app.listen(5000);
