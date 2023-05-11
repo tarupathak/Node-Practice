@@ -97,25 +97,33 @@
 
 //<-----------EXPRESS JS ------------>
 
+// const express = require("express");
+// const app = express();
+
+// app.get("", (req, res) => {
+//   //   console.log("data sent by browser = ", req.query.name);
+//   res.send(`<h1>Welcome, to Home Page.</h1><a href="/about">About Page</a>`);
+// });
+
+// app.get("/about", (req, res) => {
+//   res.send(
+//     `<input type="text" placeholder="User name" value=${req.query.name}/>Hello, this is About Page`
+//   );
+// });
+
+// app.get("/help", (req, res) => {
+//   res.send({
+//     name: "taru",
+//     email: "taru@text.com",
+//   });
+// });
+
 const express = require("express");
+const path = require("path");
+
 const app = express();
+const publicPath = path.join(__dirname, 'public');
 
-app.get("", (req, res) => {
-  //   console.log("data sent by browser = ", req.query.name);
-  res.send(`<h1>Welcome, to Home Page.</h1><a href="/about">About Page</a>`);
-});
-
-app.get("/about", (req, res) => {
-  res.send(
-    `<input type="text" placeholder="User name" value=${req.query.name}/>Hello, this is About Page`
-  );
-});
-
-app.get("/help", (req, res) => {
-  res.send({
-    name: "taru",
-    email: "taru@text.com",
-  });
-});
+app.use(express.static(publicPath)) 
 
 app.listen(5000);
