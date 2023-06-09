@@ -118,37 +118,62 @@
 //   });
 // });
 
+// const express = require("express");
+// const path = require("path");
+
+// const app = express();
+// const publicPath = path.join(__dirname, 'public');
+
+// app.set('view engine','ejs');
+// // app.use(express.static(publicPath))
+// app.get('/',(req,resp)=>{
+//     resp.sendFile(`${publicPath}/index.html`)
+// })
+
+// app.get('/profile',(_,resp)=>{
+//     const user ={
+//         name: 'taru pathak',
+//         email: 'taru@text.com',
+//         city: 'noida',
+//         skills: ['javascript','Java','Python','C++']
+//     }
+//     resp.render('profile',{user});
+// })
+
+// app.get('/about',(req,resp)=>{
+//     resp.sendFile(`${publicPath}/about.html`)
+// })
+
+// app.get('/login',(_,resp)=>{
+//     resp.render('login');
+// })
+
+// app.get('*',(req,resp)=>{
+//     resp.sendFile(`${publicPath}/nopage.html`)
+// })
+// app.listen(5000);
+
 const express = require("express");
-const path = require("path");
-
 const app = express();
-const publicPath = path.join(__dirname, 'public');
 
-app.set('view engine','ejs');
-// app.use(express.static(publicPath)) 
-app.get('/',(req,resp)=>{
-    resp.sendFile(`${publicPath}/index.html`)
-})
+const reqFilter = (req, resp, next) => {
+  if (!req.query.age) {
+    resp.send("Please provide age");
+  } else if (req.query.age < 18) {
+    resp.send("You can not access the page");
+  } else {
+    next();
+  }
+};
 
-app.get('/profile',(_,resp)=>{
-    const user ={
-        name: 'taru pathak',
-        email: 'taru@text.com',
-        city: 'noida',
-        skills: ['javascript','Java','Python','C++']
-    }
-    resp.render('profile',{user});
-})
+app.use(reqFilter);
 
-app.get('/about',(req,resp)=>{
-    resp.sendFile(`${publicPath}/about.html`)
-})
+app.get("/", (req, resp) => {
+  resp.send("Welcome to Home Page");
+});
 
-app.get('/login',(_,resp)=>{
-    resp.render('login');
-})
+app.get("/users", (req, resp) => {
+    resp.send("Welcome to Users Page");
+  });
 
-app.get('*',(req,resp)=>{
-    resp.sendFile(`${publicPath}/nopage.html`)
-})
 app.listen(5000);
