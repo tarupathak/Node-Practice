@@ -155,25 +155,29 @@
 
 const express = require("express");
 const app = express();
+const route = express.Router();
+const reqFilter = require("./middleware");
 
-const reqFilter = (req, resp, next) => {
-  if (!req.query.age) {
-    resp.send("Please provide age");
-  } else if (req.query.age < 18) {
-    resp.send("You can not access the page");
-  } else {
-    next();
-  }
-};
+// app.use(reqFilter);
 
-app.use(reqFilter);
+route.use(reqfilter);
 
 app.get("/", (req, resp) => {
   resp.send("Welcome to Home Page");
 });
 
-app.get("/users", (req, resp) => {
-    resp.send("Welcome to Users Page");
-  });
+route.get("/users", (req, resp) => {
+  resp.send("Welcome to Users Page");
+});
+
+app.get("/about", (req, resp) => {
+  resp.send("Welcome to About Page");
+});
+
+route.get("/contact", (req, resp) => {
+  resp.send("Welcome to About Page");
+});
+
+app.use('/',route);
 
 app.listen(5000);
