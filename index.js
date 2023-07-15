@@ -194,20 +194,7 @@
 
 //   const dbConnect =require('./mongodb')
 
-const { MongoClient } = require("mongodb");
-const url = "mongodb+srv://pathaktaru2002:jHDZVsfhjjTYuoPC@cluster0.ti2tfsl.mongodb.net/";
-const database = "e-comm";
-const client = new MongoClient(url);
 
-async function getData() {
-  let result = await client.connect();
-  let db = result.db(database);
-  let collection = db.collection('products');
-  let response = await collection.find({}).toArray();
-  console.log(response);
-}
-
-getData();
 
 
   // let data = await collection.find({name: 'L 10'}).toArray();
@@ -230,3 +217,25 @@ getData();
 
 // module.exports= dbConnect;
 // console.warn(dbConnect());
+
+
+
+
+// console.warn(dbConnect())
+// dbConnect().then((resp)=>{
+//   resp.find().toArray().then((data)=>{
+//     console.warn(data)
+//   });
+// })
+
+
+const dbConnect = require('./mongodb');
+
+const main = async () =>{
+  console.log('main function called');
+  let data= await dbConnect();
+  data = await data.find().toArray();
+  console.warn(data);
+}
+
+main();
